@@ -5,6 +5,28 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Document</title>
+            <!-- <script src="../jquery-3.6.0.min"></script> -->
+            <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+            
+            <script>
+                //onload 속성과 동일한 작업을 진행
+                $(document).ready(function(){
+
+                    $("ul>li").css("backgroundColor","lime");
+                });
+
+                $(function(){
+                    //onload는 한 번만 가능하지만 
+                    //ready는 여러 번 선언해도 상관이 없다. 
+                    $("ul>li").css("color","black");
+                });
+
+                $(()=>{
+                    $("ul").css("display", "inline-block");
+                })
+                
+
+            </script>
         </head>
         <body>
             <!-- 
@@ -18,7 +40,7 @@
 
 
                 파일로 되어있는 것을 불러와서 쓰면된다.\
-                
+                 
                 1. 인터넷으로 그냥 가져오는 방법
 
                 JQUERY 함수 형식으로 사용한다. $/jquery(document).ready()
@@ -30,10 +52,63 @@
                 <h1>jquery 적용하기</h1>
                 <pre>
                     jquery를 이용하기 위해서는 jquery가 구현되어있는 js파일을 페이지에 불러와서 사용함
-                     <ul>
-                         <li>CND : http 통신으로 제공하는 서버에서 페이지 로드 시 받아오는 방식</li>
-                         <li>파일 다운로드 : 직접 다운로드해서 프로젝트에 넣고 불러오는 방식</li>
-                     </ul>
                 </pre>
+                
+                <ul>
+                    <li>CDN : http 통신으로 제공하는 서버에서 페이지 로드 시 받아오는 방식</li>
+                    <li>파일 다운로드 : 직접 다운로드해서 프로젝트에 넣고 불러오는 방식</li>
+                </ul>
+           
+
+
+
+                <h2>Element불러오기</h2>
+                <pre>
+                    jquery에서 element 불러오려면 선택자를 이용한다. 
+                    (id, 전체, )
+                    $ || jQuery(선택자) == Elemnet를 불러오는 것
+                    
+                    $(선택자) || jQuery(선택자)
+                    document.getElementById() || document.getElementByClassName() 이랑 같은 것
+                </pre>
+                <p id="jq">jquery</p>
+                <p id="js">javascript</p>
+                <button onclick="checkElement()">객체 확인</button>
+            <script>
+                const checkElement = () =>{
+                    //jquery 방식으로 element 불러오기
+                    console.log($("#jq"));
+                    // js 방식으로 불러오기
+                    console.log(document.getElementById("js"));
+                }
+            </script>
+
+<br>
+                <ul id="target">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+<br>
+                <button onclick="ulTest()">가져오기</button>
+         
+            <script>
+                const ulTest = () =>{
+
+                    console.log($("ul#target>li"));
+                    let lis = $("ul#target>li");
+                    lis.css("color", "yellow");
+
+
+                    console.log(document.querySelectorAll("ul#target>li"));
+                    let lis2 = document.querySelectorAll("ul#target>li");
+                        for( let i=0; i<lis2.length; i++){
+                            lis2[i].style.backgroundColor = "red";
+                        }
+                }
+            </script>
         </body>
     </html>
+
+    <!-- css선택자 다시 보기 -->
