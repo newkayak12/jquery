@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>traversing</title>
+    <script src="/jquery-3.6.0.min"></script>
+</head>
+<body>
+        <h1>선택한 태그에서 원하는 객체 찾아내기</h1>
+        <h3>순회 탐색 적용하기</h3>
+        <pre style="font-weight: bold;">
+            fisrt() : 선택된 element list에서 제일 처음에 있는 태그 (>> 선택자:first와 유사한거지 같은 것은 아니다.)
+            
+            last() : 선택된 element list에서 제일 마지막에 있는 태그 (>> 선택자:last와 유사하다.)
+            
+            eq(index) : 선택된 element list에서 매개변수와 일치하는 인덱스 태그 
+
+            filter( selector || logic(func) ) : 선택된 태그 중 매개변수 선택자와 일치하거나 함수의 결과가 true가 나오는 태그
+
+            not( selector || logic(func) ) : 선택된 요소와 일치하지 않는 요소
+
+        </pre>
+
+        <div id="container1">
+            <h3>h3 1</h3>
+            <h3>h3 2</h3>
+            <h3>h3 3</h3>
+            <h3>h3 4</h3>
+            <h4>h4 1</h4>
+            <p>p1</p>
+            <p>p2</p>
+            <p>p3</p>
+            <p>p4</p>
+        </div>
+    
+</body>
+</html>

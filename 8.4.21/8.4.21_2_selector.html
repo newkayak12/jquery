@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery_selector</title>
+    <script src="/jquery-3.6.0.min"></script>
+</head>
+<body>
+    <h2>선택자 활용하기</h2>
+    <pre>
+        jquery에서 element(tag)를 불러올 때 선택자를 활용한다.
+        $("선택자") > element
+    </pre>
+    <br><hr>
+
+
+    <h3>id, class, multiOne</h3>
+
+
+    <div id="container">
+
+    </div>
+    <p class="tt">p1</p>
+    <p class="tt">p2</p>
+    <p class="tt">p3</p>
+    <h4 class="tt">h3 1</h4>
+    <h4 class="tt">h3 2</h4>
+
+    <script>
+        //id가 container인 태그 불러오기
+        console.log($("#container"));
+
+        //class를 이용한 선택자로 불러오기
+        console.log($(".tt"));
+
+        //다중으로 element를 불러오기
+        // ' , '로 구분해서 사용
+        console.log($("container, .tt"));
+
+        
+
+    </script>
+    <br><hr>
+    <h3>:first, :last, :even, :odd</h3>
+    <pre>
+        선택자 :first > 선택자로 선택된 element 중에서 첫 번째(0번 인덱스) 태그
+        선택자 :last > 선택자로 선택된 element 중에서 마지막 (마지막 인덱스) 태그
+        선택자 :even > 선택자로 선택된 element 중에서 짝수 인덱스 태그들
+        선택자 :odd > 선택자로 선택된 element 중에서 홀수 인덱스 태그들
+    </pre>
+
+
+    <p class="tt2">p1</p>
+    <p class="tt2">p2</p>
+    <p class="tt2">p3</p>
+    <h4 class="tt2">h3 1</h4>
+    <h4 class="tt2">h3 2</h4>
+
+    <pre>
+        테이블 예시
+        even, odd
+    </pre>
+
+    <table>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+        </tr>
+    </table>
+    
+    <script>
+        //첫 번째
+        let temp = $(".tt2:first");
+                console.log(":first");
+                console.log(temp);
+            temp.css("backgroundColor", "blue");
+
+        //마지막
+            temp = $(".tt2:last");
+                console.log(":last");
+                console.log(temp);
+            temp.css("backgroundColor", "red");
+
+        //짝수
+            temp = $(".tt2:even");
+                console.log(":even");
+                console.log(temp);
+            temp.css("color", "darkgreen");
+            temp.css("fontSize", "30px");
+
+        //홀수
+            temp = $(".tt2:odd");
+                console.log(":odd");
+                console.log(temp);
+            temp.css("color", "darker");
+            temp.css("fontSize", "10px");
+
+
+        //테이블 예시
+        let tb = $("table>tbody>tr:odd");
+       //emmet 으로 만들면 자동으로 tbody 추가하니까 기억합시다. 
+            tb.css("backgroundColor", "gray");
+            tb = $("table>tbody>tr:even");
+            tb.css("backgroundColor", "pink");
+    </script>
+    <br><hr>
+        <h3>자손/ 후손</h3>
+        <div id="container2">
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <h2>4</h2>
+            <h2>5</h2>
+            <ul>
+                <li>li1</li>
+                <li>li2</li>
+                <li>li3</li>
+            </ul>
+
+            <div>
+                <span>S1</span>
+                <span>S2</span>
+                <span>S3</span>
+            </div>
+        </div>
+        
+
+    <script>
+        let temp2 = $("div#container2 *");
+                console.log(temp2);
+    </script>
+    <br><hr>
+
+        <h3>:eq, :gt, :lt</h3>
+        <ul>
+            <li>선택자 :eq(n) > 선택된 태그 중 n번 인덱스 태그 </li>
+            <li>선택자 :gt(n) > 선택된 태그 중 n번 인덱스보다 큰 인덱스를 갖고 있는 태그들</li>
+            <li>선택자 :lt(n) > 선택된 태그 중 n번 인덱스보다 작은 인덱스를 갖고 있는 태그들</li>
+        </ul>
+
+        <ul id="target2">
+            <li>0</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+        </ul>
+    <script>
+        let lis3 = $("ul#target2>li");
+                console.log(lis3);
+            //eq
+            lis3 = $("ul#target2>li:eq(5)");
+                console.log(lis3);
+            lis3.css("backgroundColor","pink");
+
+            //gt
+            lis3 = $("ul#target2>li:gt(5)");
+            lis3.css("color","tomato");
+
+            //lt
+            lis3 = $("ul#target2>li:lt(5)");
+            lis3.css("color","royalblue");
+    </script>
+    <!-- DOM을 쉽게 사용하기 위해서 쓰는 라이브러리니까.... -->
+
+    
+</body>
+</html>
