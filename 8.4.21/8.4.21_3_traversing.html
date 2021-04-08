@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>traversing</title>
-    <script src="/jquery-3.6.0.min"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
         <h1>선택한 태그에서 원하는 객체 찾아내기</h1>
@@ -23,17 +23,369 @@
 
         </pre>
 
-        <div id="container1">
-            <h3>h3 1</h3>
-            <h3>h3 2</h3>
-            <h3>h3 3</h3>
-            <h3>h3 4</h3>
-            <h4>h4 1</h4>
-            <p>p1</p>
-            <p>p2</p>
-            <p>p3</p>
-            <p>p4</p>
-        </div>
-    
-</body>
+        <script>
+            $(function() {
+                //.ready
+                let test = $("div#container1>h3");
+                        console.log(test);
+                        console.log(test.first().html());
+                        //.html() == innerhtml
+
+                        console.log($("div#container1>h3,p").first().html());
+                        // :first를 쓰면 위와 같은 것을 할 수 없음
+                        console.log($("div#container1>h3:first").html());
+                        
+                        console.log($("div#container1>h3,p"));
+                        //여러 개 선택
+
+                    test = $("div#container1>h3:odd,div#container1>p").last();
+                        console.log(test);
+
+                //eq함수 적용
+                    test = $("div#container1>h3");
+                        console.log("여기요!!");
+                        console.log(test.eq(2));
+                        console.log(test.eq(2).html());
+                //filter
+                    test = $("div#container1 *");
+                    test.filter("h4").css("backgroundColor", "magenta");
+                    //전체 중 일부만 필터링
+
+                    test.filter(".a").css("color","royalblue");
+
+                let filterTest = test.filter((i,v)=>{
+                        // console.log("함수로");
+                        // console.log(i,v);
+                        //return 값이 있어야 하는데 return 값이 true인 element만 종합
+                        
+                        // let v2 = v.html();
+                        // let v2 = v.innerHTML;
+                        // return v2.includes("1");
+                                console.log("js Element");
+                                // callback함수의 리턴값은 이런식으로 elements
+                                console.log(v);
+                                console.log("jquery");
+                                console.log($(v));
+                        // 따라서
+                        let v2 = $(v).html();
+                                console.log("$()으로 이용");
+                                console.log(v2);
+
+                        return i%2==0;
+
+                });
+                    // 함수를 인자를 넣을 때는 index, value를 알아서 대입(callback 함수...?)
+                        console.log(filterTest);
+                    filterTest.css("textShadow","3px 3px 5px red");
+
+                    //filter함수에서 매개변수 v에 대입되는 값은 jquery의 s.fn.init()으로 반환된 객체가 아니라 
+                    //javascript의 elements를 반환한다. 그래서! jquery의 함수를 그냥 이용하기는 힘들다.
+                    
+                
+                    /*
+                     jquery는 chain 방식으로 처리한다. _ 
+                    그래서... 
+                    */
+
+                    test.filter((i,v)=>{
+                        return v.tagName=="P";
+                    }).css("border","1px solid red");
+                    /* 
+                    이와 같이 바로 쓸 수 있다. 
+
+                    chain이란?
+                    > 
+
+                    */
+
+                // not() 함수 이용하기
+                    test = $("div#container1 *");
+                        console.log(test);
+                        /* 
+                        0: h3.a
+                        1: h3
+                        2: h3
+                        3: h3.a
+                        4: h4
+                        5: p
+                        6: p.a
+                        7: p
+                        8: p.a
+                        */
+                        console.log(test.not("p"));
+                        /*
+                        0: h3.a
+                        1: h3
+                        2: h3
+                        3: h3.a
+                        4: h4 
+                        */
+                       console.log(test.not(".a"));
+                       /* 
+                        0: h3
+                        1: h3
+                        2: h4
+                        3: p
+                        4: p
+                       */
+
+                       //not에 함수 넣기
+
+                       test.not( (i,v) =>{
+                           return v.tagName=="H4";
+                           //결과가 true인 녀석이 반환되고 그 녀석이 not이 적용됨
+                       }).css("fontSize","32px");
+
+                       
+                    });//ready
+
+        </script>
+            <div id="container1">
+                <h3 class="a">h3 1</h3>
+                <h3>h3 2</h3>
+                <h3>h3 3</h3>
+                <h3 class="a">h3 4</h3>
+                <h4>h4 1</h4>
+                <p>p1</p>
+                <p class="a">p2</p>
+                <p>p3</p>
+                <p class="a">p4</p>
+            </div>
+
+            <h2>부모태그 조회하기</h2>
+            <pre>
+
+                parent() : 선택자로 선택된 태그의 바로 위 부모태그 선택
+
+                parents() : 선택자로 선택된 태그의 모든 부모태그 선택
+
+                parentsUntil() : 선택자로 선택된 태그의 모든 부모의 매개변수의 부모까지 선택
+
+            </pre>
+
+            <div id="container2">
+                <div>div div의 부모
+                    <div>div h1의 부모까지
+                        <h1>h1 p의 부모까지
+                            <p>나는 p입니다.</p>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        <script>
+            
+            $(function(){
+                // 상위 부모 태그 가져오기
+                //parent()
+                        console.log("basic");
+                        console.log($("div#container2 p").html());
+
+                        console.log("parent()");
+                        console.log($("div#container2 p").parent().html());
+
+                        console.log("parent().parent()");
+                        console.log($("div#container2 p").parent().parent().html());
+               
+                // 상위 부모 전체 태그를 가져오기
+                //parents() : 전체를 가져오는
+                        console.log("parents");
+                        console.log($("div#container2 p").parents());
+                        /* 
+                        0: h1
+                        1: div
+                        2: div
+                        3: div#container2
+                        4: body
+                        5: html
+                        */
+
+                        //first
+                        console.log($("div#container2 p").parents().first());
+                        //last
+                        console.log($("div#container2 p").parents().last());
+
+                        $("div#container2 p").parents().css("fontWeight","lighter");
+
+                //상위 부모를 일정 범위만 가져오기
+                //parentsUntil() : 부모의 일정 범위만
+                        console.log("parentsUntil()");
+                        console.log($("div#container2 p").parentsUntil("#container2"));
+                    $("div#container2 p").parentsUntil("#container2").css("border","1px dashed purple");
+                    $("div#container2 p").parentsUntil("#container2").filter((i,v)=>{
+                        return v.tagName=="H1";
+                    }).css("border","2px solid green");
+                        
+                    
+                        console.log($("p"));
+                        console.log($("p").parent());
+            });
+        </script>
+                <h3>자식 요소 탐색하기</h3>
+                <pre>
+                    1. children( 매개변수 ) : 모든 자식(손)을 리턴해주는 함수
+
+                    2. find( 매개변수 ) : 모든 후손 중에서 매개변수와 일치하는 태그
+                </pre>
+                
+                <table>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><input type="text"></td>
+                        <td><button>click you</button></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><input type="text"></td>
+                        <td><button>click me</button></td>
+                    </tr>
+                </table>
+
+            <script>
+                //tr 전체 찾기
+                $(function(){
+                            console.log($("table>tbody").children());
+                            console.log("children.last.children");
+                            console.log($("table>tbody").children().last().children());
+                            console.log("짝수 td");
+                            console.log($("table>tbody").children().children().even());
+                          
+                            // $("table>tbody").children().children().even().css("backgroundColor","aqua");
+
+                        $("table>tbody").children().children().filter( (i,v)=>{
+                            return i%2==0;
+                        }).css("backgroundColor","red");
+
+                        $("table>tbody").children().children().odd().css("backgroundColor","blue");
+
+                            //테이블 내에 있는 input태그?
+                            //find : 후손 중에서 원하는 태그를 선택
+
+                            console.log($("table").find("input"));
+                })
+            </script>
+                <h3>형제요소 탐색하기</h3>
+                <pre>
+                    1. siblings( [매개변수] ) : 선택된 요소의 같은 레벨에 있는 위, 아래 모든 태그를 선택 [매개변수와 일치하는 녀석을 선택]
+
+                    2. next() : 선택된 element의 바로 아래에 있는 태그 한 개만을 선택
+
+                    3. nextAll() : 선택된 element의 바로 아래에 있는 모든 태그를 선택
+
+                    4. nextUntil ([매개변수]) : 선택된 element의 바로 뒤에 있는 매개변수와 일치하는 태그 전까지 (선택된 녀석 ~ 매개변수)
+
+                    5. prev() : 선택된 element의 바로 앞에 있는 한 개의 태그
+
+                    6. prevAll() : 선택된 element의 앞에 있는 모든 태그들
+
+                    7. prevUntil([매개변수]) : 선택된 element의 앞에 있는 태그부터 매개변수와 일치하는 태그 전까지 (매개변수 ~ 선택된 녀석)
+                </pre>
+
+                <div id="container3">
+                    <h2>h2 1</h2>
+                    <h2>h2 2</h2>
+                    <p>p1</p>
+                    <p>p2</p>
+                    <p>p3</p>
+                    <p>p4</p>
+                    <span>span1</span>
+                    <span>span2</span>
+                    <ul>
+                        <li>li1</li>
+                        <li>li2</li>
+                        <li>li3</li>
+                        <li>li4</li>
+                    </ul>
+                </div>
+
+            <script>
+                $(function(){
+                    //같은 레벨에 있는 모든 요소
+
+                        $("div#container3>span:first").siblings().css("backgroundColor","tomato");
+                            console.log($("div#container3>span:first").siblings());
+                            console.log($("p").siblings());
+
+                    //같은 레벨에 있는 모든 태그 중 매개변수와 일치하는 태그
+                    //siblings
+                            console.log(    $("div#container3>span:first").siblings("h2") );
+                
+                    // 선택된 태그 위에 있는 한 개 태그
+                            console.log($("div#container3>p:first").prev().html());
+                    // 중복해서 계속 위로 갈 수 있음
+                    //prev
+                            console.log($("div#container3>p:first").prev().prev().html());
+                            //h2 1
+                            console.log($("div#container3>p:first").prev().prev().prev().html());
+                            //undefined
+
+                    // 선택된 태그 위에 있는 모든 태그
+                    ////prevAll
+                            console.log($("div#container3>span:last").prevAll());
+
+                    //선택된 태그 위에서 매개변수와 일치하기 전까지의 태그
+                    //prevUntil
+                            console.log($("div#container3>span:last").prevUntil($("div#container3>h2:last")));
+
+                    //밑에 있는 태그 선택
+                    //next()
+                            console.log($("#container3>p:eq(1)").next());
+                            console.log($("td").next());
+                        $("td:first").next().css("backgroundColor","lime");
+
+                            console.log($("#container3>p:last").nextAll());
+                    //nextUntil()
+                            console.log($("#container3>p:first").nextUntil("span:last"));
+                })
+            </script>
+
+                <table id="test">
+                    <tr>
+                        <td><input type="text" name="" id=""></td>
+                        <td><button class="addBtn">추가</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="" id=""></td>
+                        <td><button class="addBtn">추가</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="" id=""></td>
+                        <td><button class="addBtn">추가</button></td>
+                    </tr>
+                </table>
+            <script>
+                $(function(){
+                    $(".addBtn").click((e)=>{
+                        let prevSibl = $(e.target).parent().prev().html();
+                            $(e.target).parent().prev().html(`${prevSibl}<input type='text'>`);
+                            console.log($(e.target).parent().prev());
+                            // console.log(prevSibl);
+                    })
+                })
+            </script>
+
+            <h2>태그가 있는지 여부를 확인하는 함수</h2>
+            <pre>
+                is("선택자") : 선택된 태그에 매개변수 태그가 있는지 확인
+            </pre>
+            <button onclick="checkElement()"> 있니? </button>
+
+        <script>
+            const checkElement = () =>{
+                console.log($("#container3").children().is("ul"));
+                if(!$("#container3").children().is("table")){
+                    $("#container3").append("<table border='1'><tr><td>추가 테이블</td></tr></table>");
+                }
+            }
+        </script>
+</body>             
 </html>
