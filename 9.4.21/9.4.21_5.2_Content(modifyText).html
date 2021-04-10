@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>modify text/html (content)</title>
+            <script src="/jquery-3.6.0.min.js"></script>
+        </head>
+        <body>
+                <h1>태그에 있는 textnode의 값을 수정하기</h1>
+                <pre>
+                    1.Html()    
+                        1.html() : 선택된 태그의 textNode를 출력
+                        2.html("매개변수") : 선택된 태그의 textNode값을 매개변수 값으로 변경
+                    
+                    2.Text()
+                        1.text() : 선택된 태그의 textNode를 출력
+                        2.text("매개변수") : 선택된 태그의 textNode값을 매개변수 값으로 변경
+
+                        ** html과 text의 차이는 매개변수에 태그 형식이 들어왔을 때
+                            - html() : 태그를 해석해서 출력
+                            - text() : 문자열로 간주하여 그냥 출력
+
+                            >>> javascript의 innerHtml과 innerText와 같다.
+
+
+                </pre>
+
+                <div id="container">
+                    <p>안녕</p>
+                    <p>하이</p>
+                    <p>구텐탁</p>
+                    <p>봉쥬르</p>
+                </div>
+                <button onclick="checkText()">태그 문자 확인</button>
+            
+            <script>
+                const checkText = () =>{
+                    $("div#container").children().each( (i,v)=>{
+                            console.log("--- .html ---");
+                            console.log($(v).html());
+                            
+                            console.log("--- .html(내용) ---");
+                            $(v).html($(v).html()+"<mark>이제 점심시간이 다가옵니다!</mark>")
+                            console.log($(v).html());
+                            
+
+                            // console.log("--- .text ---");
+                            // console.log($(v).text());
+                            // console.log("--- .text(내용) ---");
+                            // $(v).text("<mark>이제 점심시간이 다가옵니다!</mark>")
+                            // console.log($(v).text());
+                    } )
+                }
+            </script>
+            <br><br><hr>
+
+
+
+
+                <select name="lunchMenu" id="lunchMenu">
+                    <option value="라면">라면</option>
+                </select>
+
+                <input type="text" name="option" id="option">
+                <button onclick="addOption()" id="addbtn">추가하기</button>
+            
+            <script>
+                const addOption = () =>{
+                    let ops = $("select#lunchMenu").html();
+                    let addops = "<option value="+($('input#option').val())+">"+$('input#option').val()+"</option>";
+                        
+
+                            if($(addops).val() != 0){
+                                    if($("select#lunchMenu").children().length<5){
+
+                                        $("select#lunchMenu").html(ops+addops);
+                                        $("input#option").val('');
+                                        $("#option").focus();
+                                        
+                                    } else {
+                                            alert('더 이상 입력할 수 없습니다.');
+                                        $("input#option").attr("disabled","disabled");
+                                        $("button#addbtn").removeAttr("onclick")
+
+                                    }
+
+                            } else {
+                                alert('메뉴를 입력하세요!');
+                                $("#option").focus();
+                            }
+                }
+
+            </script>
+
+
+
+
+
+        </body>
+    </html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>jQuery_Object manipulation</title>
+            <script src="/jquery-3.6.0.min.js"></script>
+        </head>
+        <body>
+        <!-- 
+            객체 확장
+        -->     <h1>Object manipulation 2</h1>
+            <br><hr>
+                <h3>객체 병합하기</h3>
+                <pre>
+                    $.extend(객체1, 객체2, ... ) : 여러 개의 객체를 하나로 합칠 때 사용
+                </pre>
+
+                <button onclick="addObj()">객체 합치기</button>
+
+            <script>
+                // $(function(){
+                    const addObj = () =>{
+                        let obj = {
+                            name:'유병승',
+                            age:19
+                        }
+
+                        let obj2 = {
+                            gender : '남',
+                            email : 'prince0324@naver.com'
+                        }   
+
+                        let obj3 = {
+                            height : 187.2,
+                            weight : 54.2
+                        }
+                                console.log("합치기 전");
+                                console.log(obj);
+                            // //js로 병합하기
+                            // for(let key in obj2){
+                            //     obj[key] = obj2[key];
+                            // }
+                            //     console.log("합치기 후");
+                            //     console.log(obj);
+
+                            $.extend(obj,obj2,obj3,{math:90,eng:80,kor:100});
+                                console.log(obj);
+                                // 첫 번째 인자값에 합쳐놓으며 첫 번쨰 인자값은 원본값이 수정되는 식이다.
+
+                    }
+
+                // })
+            </script>
+            <br><hr>
+                <h3>$변수 충돌 방지하기 </h3>
+                <pre>
+                    $변수를 다른 라이브러리나 변수로 활용하고 있을 때 충돌이 일어날 수 있다.
+                    let 바꿀 변수 = $.noConflict();
+                </pre>
+                <div id="test">
+                    $test
+                </div>
+            <script>
+                let jq = $.noConflict();
+                //이러면 $가 jq라는 변수로 대체가 된다.
+                        console.log(jq("div#test").html());
+                
+                
+                    $  = jq.noConflict();
+                
+            </script>
+                <br><hr>
+
+                
+        </body>
+    </html>

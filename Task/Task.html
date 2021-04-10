@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Task</title>
+            <script src="../jquery-3.6.0.min.js"></script>
+        </head>
+        <body>
+                <h1>문제1</h1>
+                <fieldset>
+                    <legend>보기</legend>
+                    <input type="text" name="inputPro1" id="inputPro1" style="width: 400px;">
+                </fieldset>
+
+                <div id="containerPro1" style="border: 1px solid red; height: 100px; margin: 10px 0px 10px 3px;"></div>
+                <button onclick="funcPro1()">확인하기</button>
+
+            <script>
+                const funcPro1 = () =>{
+                    let input = $("input#inputPro1").val();
+                    // input#inputPro에 있는 값을 갖고 온다 (보기 안에 있는 input)
+
+                    let containerPro1 = $("div#containerPro1");
+                    // 아래에 있는 빨간 div를 불러온다.
+                    
+                        input = input.replace(" ","");
+                        // 보기에 띄어쓰기를 없애주는 replace
+                        
+                        containerPro1.html("보기의 문자열 길이는 "+input.length+"입니다.")
+                        // 빨간 div에 html로 값을 주입, input.length로 문자열의 길이를 추출
+                }
+            </script>
+                <br><hr>
+                <h1>문제2</h1>
+                <fieldset>
+                    <legend>보기</legend>
+                    <p id="pPro2">콜라,사이다,햄버거,피자,한약</p>
+                </fieldset>
+                <div id="containerPro2" style="border: 1px solid red; height: 100px; margin: 10px 0px 10px 3px;"></div>
+                <button onclick="funcPro2()">확인하기</button>
+            <script>
+                const funcPro2 = () =>{
+                    let textPro2 = $("p#pPro2").html();
+                    // p태그의 값을 가져옴 이 안에는 콜라, 사이다, 햄버거, 피자, 한약이라는 값이 있다.
+
+                    let textBundle = textPro2.split(",");
+                    // 해당 값을 ","을 기준으로 배열로 반환
+                    let containerPro2 = $("div#containerPro2");
+                    // 빨간 div를 가져온다.
+
+                        for(let i =0; i<textBundle.length; i++){
+                            // p태그를 기반으로 만든 배열의 길이만큼 순회
+                            let conTemp = containerPro2.html();
+                            // 빨간 div 안에 있는 값을 가져옴 (undefined가 나올거임)
+                                
+                                if(i==0){
+                                    // undefined가 합쳐지는 것을 막기 위해서 분기 처리
+                                    $("div#containerPro2").html(conTemp+(i+1)+". "+textBundle[i]);
+                                    // 맨 처음은 br태그를 없앤다.
+                                } else{
+
+                                    $("div#containerPro2").html(conTemp+"<br>"+(i+1)+". "+textBundle[i]);
+                                    // 그 다음부터는 br태그롤 붙여서 기존의 값과 추가되는 값 간의 공백을 준다.
+                                }
+                        }
+                }
+            </script>  
+                    <br><br><hr>
+                    <h1>문제3_배열실습1</h1>
+                    <fieldset style="margin: 0px 0px 10px 0px;">
+                        <legend>보기</legend>
+                        <div id="containerPro3">
+                            <label for="" id="la1" style="display: block;">사과,바나나,당근</label>
+                            <label for="" id="la2" style="display: block;">김밥,치즈,떡볶이,햄버거</label>
+                            <label for="" id="la3" style="display: block;">환타,사이다,콜라</label>
+                            <label for="" id="la4" style="display: block;">고양이,강아지</label>
+                                    
+                        </div>
+                    </fieldset>
+
+                    <input type="text" id="inputPro3" style="margin: 0px 0px 10px 0px;">
+                    <br>
+                    <button onclick="funcPro3()">전송 및 처리</button>
+
+            <script>
+                const funcPro3 = () =>{
+                    let contentPro3 = $("div#containerPro3").children();
+                    // div 안의 태그를 모조리 불러오는 것으로 label을 불러온다.
+                    let contentTextPro3="";
+                    // label 안의 text를 추출한 준비 완료!
+
+                        contentPro3.each( (i,v)=>{
+                            // label 안의 값을 추출하기 위한 each문
+                            if(i<3){
+                                contentTextPro3 += $(v).html()+",";
+                                // 한 라벨이 끝나면 ','을 붙여서 split하기 위한 준비를 해준다.
+                            } else{
+                                contentTextPro3 += $(v).html();
+                                // 얘는 마지막에도 ','가 붙는다면 split시 공백이 들어가는 것을 막기 위해서
+                            }
+                        })  
+
+                    let contentArrPro3= contentTextPro3.split(",");
+                    // 위에서 합산한 문자열을 배열로 반환한다.
+
+                    let inputContent =  $("input#inputPro3").val();
+                    // 검증하기 위한 inpu#inpuPro3의 값을 불러온다.
+                        
+                        contentArrPro3.forEach( (v,i)=>{
+                            // foreach로 순회하면서 값을 검증할 것
+                            if(v==inputContent){
+                                //input의 값과 배열의 값이 일치할 경우
+                                
+                                alert(v+"는 배열 index "+(i+1)+"번째에 존재합니다.");
+                                // alert을 통해서 값과 인덱스+1로 출력한다.
+                            }
+                        })
+                }
+            </script>
+
+            <!--  -->
+                    <br><br><hr>
+                    <h1>문제4.1_색상변경</h1>
+                    <div id="container4dot1" style="border: 1px black solid; height: 100px; width: 100px;"></div>
+                    <input type="color" name="color4dot1" id="color4dot1">
+                    <button onclick="func4dot1()">변경</button>
+            <script>
+                const func4dot1 = () =>{
+                    let container4dot1 = $("div#container4dot1");
+                    // div 데려오고
+                    let input4dot1  = $("input#color4dot1").val();
+                    // input의 컬러 16진수 값 불러오고
+                    container4dot1.css("backgroundColor", input4dot1);
+                    //css로 먹여!
+                }
+            </script>
+                    <hr>
+                    <h1>문제4.2_크기조절</h1>
+                     <div id="container4dot2" style="border: 1px black solid; width: 100px; height: 100px;"></div>
+                     <button onclick="func4dot2_50x50()">50x50</button>
+                     <button onclick="func4dot2_100x100()">100x100</button>
+                     <button onclick="func4dot2_200x200()">200x200</button>
+            <script>
+                const func4dot2_50x50=()=>{
+                    $("div#container4dot2").css("height","50pt").css("width","50pt");
+                    // css로 바꾼다. 참고로 chaining
+                    
+                }
+
+                const func4dot2_100x100=()=>{
+                    $("div#container4dot2").css("height","100pt").css("width","100pt");
+                }   
+
+                const func4dot2_200x200=()=>{
+                    $("div#container4dot2").css("height","200pt").css("width","200pt");
+                }
+            </script>
+
+                    <br><br><hr>
+                    <h1>문제5_배열실습2</h1>
+                    <fieldset style="margin: 0px 0px 20px 0px;">
+                        <legend>보기</legend>
+                        <div id="containerPro5">
+                            <p>S B </p> 
+                            <p>e v o l</p>
+                        </div>
+                    </fieldset>
+                    <div id="resultPro5" style="border: 1px red solid; height: 32px;"></div>
+                    <button onclick="funcPro5()">처리</button>
+            <script>
+                const funcPro5 = () =>{
+
+                    let cont = $("div#containerPro5").children();
+                    // div아래 있는 배열들을 한 번에 가져온다.
+                    let textPro5 = "";
+                    // 텍스트 준비
+                    
+                    cont.each( (i,v)=>{
+                        textPro5 += $(v).html();
+                        // 배열의 값을 텍스트로 합치기
+                    } )     
+
+                    let arrPro5 = textPro5.split(" ");
+                    // split으로 텍스트의 " "제거 하고 배열로 반환
+                        arrPro5 = arrPro5.reverse()
+                        // 배열로 글자 뒤집기
+
+                    let resultPro5 = $("div#resultPro5");
+                    // 빨간 div선택
+                    let txtPro5 ="";
+                    // 누적해서 빨간 div에 넣을 글자 준비
+                        arrPro5.forEach( (v,i)=>{
+                            txtPro5 += v;
+                            // 누적
+                            
+                        })  
+                        
+                        resultPro5.html(txtPro5);
+                        // 빨간 div에 글자 삽입
+                }
+            </script>
+
+                    <br><br><hr>
+                    <h1>문제6_실습문제1</h1>
+
+                    <table>
+                        <tr>
+                            <td>구매자 : </td>
+                            <td><input type="text" name="byrPro6" id="byrPro6"></td>
+                        </tr>
+                        <tr>
+                            <td>상품명 : </td>
+                            <td><input type="text" name="gdsPro6" id="gdsPro6"></td>
+                        </tr>
+                        <tr>
+                            <td>상품 가격 : </td>
+                            <td><input type="text" name="prcPro6" id="prcPro6"> 만원</td>
+                        </tr>
+                        <br>
+                    </table>
+                    <button onclick="funcPro6()" style="margin: 20px 0px 20px 0px;">입력값 출력하기</button>
+                    <br>
+                    <div id="resultPro6" style="border: 1px black solid; background-color: rgb(255,255,136); width: 400px; height: 200px;" >
+
+                    </div>
+
+            <script>
+                const funcPro6 = () =>{
+
+                    let byr = $("input#byrPro6").val();
+                    let gds = $("input#gdsPro6").val();
+                    let prc = $("input#prcPro6").val();
+                    let txt = "";
+                    txt = "구입자 : "+byr+"님 <br>"+"구입상품 : "+gds+"<br>"+"구매가격 : "+prc+"만원";
+                    
+                    $("div#resultPro6").html(txt);
+                }
+            </script>
+
+                <br><br><hr>
+                <h1>문제7_실습문제7</h1>
+
+                <fieldset>
+                    <legend>납품정보</legend>
+                    <ul>
+                        <li>상품명 : 
+                            <select type="text" name="gdsNmPro7" id="gdsNmPro7">
+                                <option value="grape">grape</option>
+                                <option value="apple">apple</option>
+                                <option value="orange">orange</option>
+                                <option value="banana">banana</option>
+                            </select>
+                        </li>
+                        <li>납품수량 : <input type="number" name="gdsNumPro7" id="gdsNumPro7"></li>
+                        <li>납품등급 : <input type="range" name="gdsgrdPro7" id="gdsgrdPro7" max="10" min="0" value="2" onchange="sliderPro7()">
+                            <span id="sliderPro7"></span></li>
+                        <li>기타사항 : <textarea name="otherPro7" id="otherPro7" cols="30" rows="2"></textarea></li>
+                    </ul>
+                </fieldset>
+                <button onclick="funcPro7()">send Message</button>
+
+            <script>
+                    $("span#sliderPro7").html($("input#gdsgrdPro7").val());
+
+                const sliderPro7 = () =>{
+                    $("span#sliderPro7").html($("input#gdsgrdPro7").val());
+                }
+                const funcPro7 = () =>{
+                    let gdsNmPro7 = $("select#gdsNmPro7").val();
+                    let gdsNumPro7 = $("input#gdsNumPro7").val();
+                    let gdsgrdPro7 = $("input#gdsgrdPro7").val();
+                    let txtareaPro7 = $("#otherPro7").val();
+
+                    console.log(gdsNmPro7+"\n"+gdsNumPro7+"\n"+gdsgrdPro7+"\n"+txtareaPro7);
+
+
+                    alert(
+                        "상품명 : "+gdsNmPro7+"\n"+
+                        "납품수량 : "+gdsNumPro7+"\n"+"납품등급 : "+gdsgrdPro7+"\n"+"기타사항 : "+txtareaPro7+"\n"+"입력하신 내용이 맞습니까?"
+                    )
+
+                }
+
+
+            </script>
+            
+                <br><br><hr>
+                <h1>문제8_실습문제3</h1>
+
+                <fieldset style="text-align: center; background-color: rgb(211,211,211);" >
+                    <legend>
+                        검색할 항목을 선택하세요.
+
+                    </legend>
+                    <input type="radio" name="radioPro8" id="radioPro8_title" onclick="funcPro8()"> 제목
+                    <input type="radio" name="radioPro8" id="radioPro8_date" onclick="funcPro8()"> 날짜
+                    <input type="radio" name="radioPro8" id="radioPro8_writer" onclick="funcPro8()"> 작성자
+                </fieldset>
+                <hr>
+                <div id="resultPro8" >
+
+                </div>
+                
+            <script>
+                const funcPro8 = () =>{
+                    let resultPro8 = $("div#resultPro8");
+                    let title = $('<div style="background-color: rgb(254, 195, 9); border: 1px black solid; height: 50px" id="common"><p style="margin: 0px 0px 0px 10px">검색할 제목을 입력하세요</p><input type="text" name="title_input" id="title_input" style="margin: 0px 0px 0px 10px"> <button>검색</button></div>');
+                    //title 태그 미리 작성
+                    
+                    let date= $('<div style="background-color: rgb(254, 195, 9); border: 1px black solid; height: 50px" id="common"><p style="margin: 0px 0px 0px 10px">검색할 날짜를 선택하세요 : </p><input type="date" style="margin: 0px 0px 0px 10px"> - <input type="date" style="margin: 0px 0px 0px 10px"> <button>검색</button></div>');
+                    //date 태그 미리 작성
+
+                    let writer = $('<div style="background-color: rgb(254, 195, 9); border: 1px black solid; height: 50px" id="common"><p style="margin: 0px 0px 0px 10px">검색할 작성자 아이디를 입력하세요</p><input type="text" name="title_input" id="title_input" style="margin: 0px 0px 0px 10px"> <button>검색</button></div>');;
+
+                    if( $("input#radioPro8_title").prop("checked") == true ){
+                      
+                        $("#common").remove();
+                        resultPro8.append(title);
+                        
+
+
+                    } else if( $("input#radioPro8_date").prop("checked")==true ){
+                      
+                        $("#common").remove();
+                        resultPro8.append(date);
+
+                    } else if( $("input#radioPro8_writer").prop("checked")==true ){
+                        
+                        $("#common").remove();
+                        resultPro8.append(writer);
+                    }
+                }
+            </script>
+                <br><br><hr>
+                <h1>문제9_실습문제10</h1>
+                <div id="mainPro9" style="text-align: center;">
+                <h2 style="text-decoration: underline; margin: 0px 0px 30px 0px;">거래처 등록</h2>
+
+                <table style="border: 1px black solid;" id="tablePro10">
+                    <tr>
+                        <th>거래처명</th>
+                        <td><input type="text" name="" id="" style="width: 200px; margin: 0px 0px 0px 10px;" value="123"></td>
+                    </tr>
+                    <tr>
+                        <th>주소</th>
+                        <td><input type="text" name="" id="" style="width: 300px; margin: 0px 0px 0px 10px;" value="123"></td>
+                    </tr>
+                    <tr>
+                        <th>전화번호</th>
+                        <td><input type="text" name="" id="" style="width: 200px; margin: 0px 0px 0px 10px;" value="123"></td>
+                    </tr>
+                    <tr>
+                        <th>품명(중고품)</th>
+                        <td>
+                            <input type="checkbox" name="chk1" id="">메인보드
+                            <input type="checkbox" name="chk1" id="">모니터
+                            <input type="checkbox" name="chk1" id="">프린터
+                            <input type="checkbox" name="chk1" id="">하드디스크
+                            <input type="checkbox" name="chk1" id="" checked>메모리
+                            <input type="checkbox" name="chk1" id="">CPU
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><p>모두선택/해제 <input type="checkbox" name="" id="chkallPro9" onclick="_chkallPro9()" ></p>품명(수입산)</th>
+                        <td>
+                            <input type="checkbox" name="chk1" id="" class="chPro9">메인보드
+                            <input type="checkbox" name="chk1" id=""class="chPro9">모니터
+                            <input type="checkbox" name="chk1" id="" class="chPro9">프린터
+                            <input type="checkbox" name="chk1" id="" class="chPro9">하드디스크
+                            <input type="checkbox" name="chk1" id="" class="chPro9">메모리
+                            <input type="checkbox" name="chk1" id="" class="chPro9">CPU
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"> <button style="margin-right: 10px;">등록</button><button>취소</button></td>
+                    </tr>
+                </table>
+                </div>
+
+            <style>
+                #tablePro10{
+                    border-collapse: collapse;
+                }
+                #tablePro10 th{
+                    text-align: right;
+                    border: 1px black solid;
+                    width: 150px;
+                    color: rgba(243, 94, 8, 0.822);
+                    background-color: rgb(247, 236, 178);
+                }
+                #tablePro10 th>p{
+                    font-size: 12px;
+                    font-style: italic;
+                    color: blue;
+                    margin: 0px 0px 0px 0px;
+                }
+                
+                #tablePro10 td{
+                    text-align: left;
+                    border: 1px black solid;
+                    width: 600px;
+                    
+                }
+
+                #tablePro10 tr:last-child>td{
+                    text-align: center;
+                    height: 50px;
+                }
+
+            </style>
+
+            <script>
+               
+
+                const _chkallPro9 =() =>{
+                    let checkbox = $(".chPro9");
+                    console.log(checkbox);
+
+                    checkbox.each( (i,v)=>{
+                        if($(v).attr("checked")=="checked"){
+
+                            $(v).removeAttr("checked")
+
+                        } else{
+
+                            $(v).attr("checked","checked");
+                        }
+                    })
+                }
+                
+            </script>
+                <h1>문제10</h1>
+                <br><br><hr>
+                <div style="text-align: center;">
+                    <h3>rainbow Color</h3>
+                    <table id="tablePro11">
+                        <tr>
+                            <th>전체선택</th>
+                            <td>
+                              <label for="redAll"><input type="radio" name="all" id="redAll" onclick="colorPro10(this)">빨</label>
+                              <label for="orangeAll"><input type="radio" name="all" id="orangeAll" onclick="colorPro10(this)">주</label>
+                              <label for="yellowAll"><input type="radio" name="all" id="yellowAll" onclick="colorPro10(this)">노</label>
+                              <label for="greenAll"><input type="radio" name="all" id="greenAll" onclick="colorPro10(this)">초</label>
+                              <label for="blueAll"><input type="radio" name="all" id="blueAll" onclick="colorPro10(this)">파</label>
+                              <label for="navyAll"><input type="radio" name="all" id="navyAll" onclick="colorPro10(this)">남</label>
+                              <label for="purpleAll"><input type="radio" name="all" id="purpleAll" onclick="colorPro10(this)">보</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>하나</th>
+                            <td>
+                                <label for="redfir"><input type="radio" name="fir" id="redfir" onclick="colorPro10(this)">빨</label>
+                                <label for="orangefir"><input type="radio" name="fir" id="orangefir" onclick="colorPro10(this)">주</label>
+                                <label for="yellowfir"><input type="radio" name="fir" id="yellowfir" onclick="colorPro10(this)">노</label>
+                                <label for="greenfir"><input type="radio" name="fir" id="greenfir" onclick="colorPro10(this)">초</label>
+                                <label for="bluefir"><input type="radio" name="fir" id="bluefir" onclick="colorPro10(this)">파</label>
+                                <label for="navyfir"><input type="radio" name="fir" id="navyfir" onclick="colorPro10(this)">남</label>
+                                <label for="purplefir"><input type="radio" name="fir" id="purplefir" onclick="colorPro10(this)">보</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>둘</th>
+                            <td>
+                                <label for="redsec"><input type="radio" name="sec" id="redsec" onclick="colorPro10(this)">빨</label>
+                              <label for="orangesec"><input type="radio" name="sec" id="orangesec" onclick="colorPro10(this)">주</label>
+                              <label for="yellowsec"><input type="radio" name="sec" id="yellowsec" onclick="colorPro10(this)">노</label>
+                              <label for="greensec"><input type="radio" name="sec" id="greensec" onclick="colorPro10(this)">초</label>
+                              <label for="bluesec"><input type="radio" name="sec" id="bluesec" onclick="colorPro10(this)">파</label>
+                              <label for="navysec"><input type="radio" name="sec" id="navysec" onclick="colorPro10(this)">남</label>
+                              <label for="purplesec"><input type="radio" name="sec" id="purplesec" onclick="colorPro10(this)">보</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>셋</th>
+                            <td>
+                                <label for="redthr"><input type="radio" name="thr" id="redthr" onclick="colorPro10(this)">빨</label>
+                              <label for="orangethr"><input type="radio" name="thr" id="orangethr" onclick="colorPro10(this)">주</label>
+                              <label for="yellowthr"><input type="radio" name="thr" id="yellowthr" onclick="colorPro10(this)">노</label>
+                              <label for="greenthr"><input type="radio" name="thr" id="greenthr" onclick="colorPro10(this)">초</label>
+                              <label for="bluethr"><input type="radio" name="thr" id="bluethr" onclick="colorPro10(this)">파</label>
+                              <label for="navythr"><input type="radio" name="thr" id="navythr" onclick="colorPro10(this)">남</label>
+                              <label for="purplethr"><input type="radio" name="thr" id="purplethr" onclick="colorPro10(this)">보</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>넷</th>
+                            <td>
+                                <label for="redfour"><input type="radio" name="four" id="redfour" onclick="colorPro10(this)">빨</label>
+                              <label for="orangefour"><input type="radio" name="four" id="orangefour" onclick="colorPro10(this)">주</label>
+                              <label for="yellowfour"><input type="radio" name="four" id="yellowfour" onclick="colorPro10(this)">노</label>
+                              <label for="greenfour"><input type="radio" name="four" id="greenfour" onclick="colorPro10(this)">초</label>
+                              <label for="bluefour"><input type="radio" name="four" id="bluefour" onclick="colorPro10(this)">파</label>
+                              <label for="navyfour"><input type="radio" name="four" id="navyfour" onclick="colorPro10(this)">남</label>
+                              <label for="purplefour"><input type="radio" name="four" id="purplefour" onclick="colorPro10(this)">보</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>다섯</th>
+                            <td>
+                                <label for="redfif"><input type="radio" name="fif" id="redfif" onclick="colorPro10(this)">빨</label>
+                              <label for="orangefif"><input type="radio" name="fif" id="orangefif" onclick="colorPro10(this)">주</label>
+                              <label for="yellowfif"><input type="radio" name="fif" id="yellowfif" onclick="colorPro10(this)">노</label>
+                              <label for="greenfif"><input type="radio" name="fif" id="greenfif" onclick="colorPro10(this)">초</label>
+                              <label for="bluefif"><input type="radio" name="fif" id="bluefif" onclick="colorPro10(this)">파</label>
+                              <label for="navyfif"><input type="radio" name="fif" id="navyfif" onclick="colorPro10(this)">남</label>
+                              <label for="purplefif"><input type="radio" name="fif" id="purplefif" onclick="colorPro10(this)">보</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>여섯</th>
+                            <td>
+                                <label for="redsix"><input type="radio" name="six" id="redsix" onclick="colorPro10(this)">빨</label>
+                              <label for="orangesix"><input type="radio" name="six" id="orangesix" onclick="colorPro10(this)">주</label>
+                              <label for="yellowsix"><input type="radio" name="six" id="yellowsix" onclick="colorPro10(this)">노</label>
+                              <label for="greensix"><input type="radio" name="six" id="greensix" onclick="colorPro10(this)">초</label>
+                              <label for="bluesix"><input type="radio" name="six" id="bluesix" onclick="colorPro10(this)">파</label>
+                              <label for="navysix"><input type="radio" name="six" id="navysix" onclick="colorPro10(this)">남</label>
+                              <label for="purplesix"><input type="radio" name="six" id="purplesix" onclick="colorPro10(this)">보</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>일곱</th>
+                            <td>
+                                <label for="redsev"><input type="radio" name="sev" id="redsev" onclick="colorPro10(this)">빨</label>
+                              <label for="orangesev"><input type="radio" name="sev" id="orangesev" onclick="colorPro10(this)">주</label>
+                              <label for="yellowsev"><input type="radio" name="sev" id="yellowsev" onclick="colorPro10(this)">노</label>
+                              <label for="greensev"><input type="radio" name="sev" id="greensev" onclick="colorPro10(this)">초</label>
+                              <label for="bluesev"><input type="radio" name="sev" id="bluesev" onclick="colorPro10(this)">파</label>
+                              <label for="navysev"><input type="radio" name="sev" id="navysev" onclick="colorPro10(this)">남</label>
+                              <label for="purplesev"><input type="radio" name="sev" id="purplesev" onclick="colorPro10(this)">보</label>
+                            </td>
+                        </tr>
+                        <tr id="fin">
+                            <td colspan="2"> <button>submit</button> <button>reset</button></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            <style>
+                #tablePro11{
+                    border-collapse: collapse;
+                    width: 400px;
+                    height: 100px;
+                }
+
+                #tablePro11 th, #tablePro11 td{
+                    border: 1px black solid;
+                    
+                }
+                #tablePro11 th{
+                    width: 100px;
+                }
+            </style>
+
+            <script>
+                const colorPro10 = (e) =>{
+                        // console.log($(e).prop("id"));
+
+                        //all이 안들어가면 
+                        let color = $(e).prop("id");
+                                if(color.includes("All")){
+                                    let childr = $(e).parent().parent().parent().nextUntil("#fin");
+                                        childr.each( (i,v)=>{
+                                            console.log($(v).children().last());
+                                            let innerOne = $(v).children().last();
+                                                    if(color.includes("red")){
+                                                        console.log("red");
+                                                        innerOne.css("backgroundColor","red");
+
+                                                    } else if(color.includes("orange")){
+                                                        console.log("o");
+                                                        innerOne.css("backgroundColor","orange");
+
+                                                    } else  if(color.includes("yello")){
+                                                        console.log("y");
+                                                        innerOne.css("backgroundColor","yellow");
+
+                                                    } else if(color.includes("green")){
+                                                        console.log("g");
+                                                        innerOne.css("backgroundColor","green");
+
+                                                    } else  if(color.includes("blue")){
+                                                        console.log("b");
+                                                        innerOne.css("backgroundColor","blue");
+
+                                                    } else if(color.includes("navy")){
+                                                        console.log("n");
+                                                        innerOne.css("backgroundColor","navy");
+
+                                                    } else if(color.includes("purple")){
+                                                        console.log("p");
+                                                        innerOne.css("backgroundColor","purple");
+
+                                                    }
+
+                                        });
+
+
+
+                                } else{
+                                    if(color.includes("red")){
+                                        console.log("red");
+                                        $(e).parent().parent().css("backgroundColor","red");
+
+                                    } else if(color.includes("orange")){
+                                        console.log("o");
+                                        $(e).parent().parent().css("backgroundColor","orange");
+
+                                    } else  if(color.includes("yello")){
+                                        console.log("y");
+                                        $(e).parent().parent().css("backgroundColor","yellow");
+
+                                    } else if(color.includes("green")){
+                                        console.log("g");
+                                        $(e).parent().parent().css("backgroundColor","green");
+
+                                    } else  if(color.includes("blue")){
+                                        console.log("b");
+                                        $(e).parent().parent().css("backgroundColor","blue");
+
+                                    } else if(color.includes("navy")){
+                                        console.log("n");
+                                        $(e).parent().parent().css("backgroundColor","navy");
+
+                                    } else if(color.includes("purple")){
+                                        console.log("p");
+                                        $(e).parent().parent().css("backgroundColor","purple");
+
+                                    }
+                            
+                                }
+                    }
+                
+            </script>
+
+
+
+
+
+
+        </body>
+</html>

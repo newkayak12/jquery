@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>class& attribution &css</title>
+            <script src="/jquery-3.6.0.min.js"></script>
+
+            <style>
+                .a0{
+                    color: aquamarine;
+                }
+
+                .a1{
+                    color: red;
+                }
+                .a2{
+                    color: yellow;
+                }
+                .a3{
+                    color: green;
+                }
+                .a4{
+                    background-color: coral;
+                }
+
+                .a5{
+                    color: white;
+                    background-color: green;
+                }
+
+            </style>
+        </head>
+        <body>
+                <h1>클래스/속성 관리하기</h1>
+
+                <h2>클래스 관리하기</h2>
+                <pre>
+                    jquery가 제공하는 함수를 통해서 class를 추가, 삭제할 수 있는 것
+
+                    1. addClass(" 클래스 이름" ) : 태그에 클래스를 추가
+                    
+                    2. removeClass( " 클래스 이름" ) : 인자에 클래스명이 있으면 삭제 없으면 그냥 넘어감
+                    
+                    3. toggleClass (" 클래스 이름" ) : 태그에 클래스 이름이 있으면 삭제, 없으면 추가
+                </pre>   
+
+                <div id="container">
+                    <h1 class="b">h1</h1>
+                    <p>p1</p>
+                    <p>p2</p>
+                    <span class="b">span</span>
+                    <h2>h2</h2>
+                </div>
+
+                <button onclick="addClassTest()">class 추가하기</button>
+                <button onclick="rmClassTest()">class 제거하기</button>
+                <button onclick="toggleTest()">class 토글하기</button>
+            <script>
+                const addClassTest = () =>{
+                        // $("p").addClass("a1 a4");
+                        // $("#container").children().addClass("a0");
+                        //이렇게 하면 추가하는 거지 덮어쓰는게 아니다.
+
+
+                        //function을 넣을 수 있다???????????
+                        $("#container").children().addClass( (i,v)=>{
+                            console.log(i, v);
+                            //i는 #container의 인덱스
+                            //v는 클래스 값
+                            //return이 클래스 속성 값으로 추가됨
+                                if(i%2==0){
+                                    return "a1";
+                                } else {
+                                    return "a5";
+                                }
+                        })
+
+                    
+                }
+
+                const rmClassTest = () =>{
+                         $("p").removeClass("a1 a4");
+                         //클래스의 매개변수와 일치하는 값을 삭제한다. 없으면 PASS
+
+                }
+
+                //이 안에 function을 넣을 수도 있다????????????????
+                const toggleTest = () =>{
+                    $("#container").children().toggleClass("a5");
+                    
+                }
+
+            </script>
+
+<!--  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+
+
+                <br><br><hr>
+                <h2>속성 관리하기</h2>
+                <h3>attr()함수</h3>
+                <pre>
+                    <b>attr(): 태그가 가지고 있는 속성에 대해서 수정/확인 할 수 있는 함수이다.</b>
+
+                    1.attr("속성명") : 속성명의 값을 확인한다. 
+
+                    2.attr("속성명", "속성값") : 속성명에 속성값을 대입한다.
+
+                    3.attr("속성명", function( (i,v) =>{ ... } )) : 속성명에 함수 로직을 실행해서 반환하는 속성 값을 대입한다. 
+
+                    4.attr({속성명: 속성값, 속성명: 속성값, ... }) : 객체에 지정된 속성, 속성값을 대입
+
+                    5.removeAttr("속성명") : 속성명에 해당하는 속성을 삭제
+                </pre>
+                <p>img</p>
+                <img src="../9.4.21/jqueryImgTest.jpg" alt="" width="300px" height="250px">
+                <img src="../9.4.21/br.jpg" alt="" width="200px" height="150px">
+                <img src="../9.4.21/jImg.jpg" alt="photo" width="400px" height="350px">
+                <br>
+                <button onclick="sizeChan()">이미지 크기 변경(속성)</button>
+                <button onclick="imgChan()">이미지 변경(속성)</button>
+                <button onclick="funcUserChan()">function으로(속성) </button>
+                <button onclick="objChan()"> 객체를 이용 (속성)</button>
+                <button onclick="rmAttr()">속성 삭제 (속성)</button>
+
+            <script>
+                const rmAttr = () =>{
+                    $("img:last").removeAttr("src");
+                    // removeAttr("속성명")
+                }
+
+                const objChan = () =>{
+                    $("img").first().attr({
+                        src:"https://img.sbs.co.kr/newsnet/etv/upload/2012/03/09/30000022873_500.jpg",
+                        width: "200px",
+                        height: "200px"
+
+                    })
+                }
+
+                const funcUserChan = () =>{
+                    $("img").attr("src",(i,v)=>{
+                        if(i%2==0){
+                            return "https://file2.nocutnews.co.kr/newsroom/image/2013/09/25/20130925153114907688.jpg";
+                        }
+                    })
+                }
+
+                const sizeChan=()=>{
+                    $("img").attr("width",Math.random()*400+100);
+                    $("img").attr("height","350px");
+                }
+                const imgChan = () =>{
+                    $("img").each((i,v)=>{
+                        if(i%2==1){
+                            $(v).attr("src","https://file2.nocutnews.co.kr/newsroom/image/2013/09/25/20130925153114907688.jpg");
+                        }
+                        
+                    })
+
+                    // $("img").eq(1).attr("src","../9.4.21/brad.jpg")
+                }
+                $(function(){
+                    //attr함수로 속성 값 가져오기
+                    let widthV =  $("img").attr("width");
+                            console.log(widthV);
+                    let heightV = $("img").attr("height");
+                            console.log(heightV);
+                    let src = $("img").attr("src")
+                            // console.log(src);
+                })
+            </script>
+            
+
+<!--  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+            <br><br><br>
+                <input type="checkbox" value="java">java
+                <input type="checkbox" value="oracle">oracle
+                <input type="checkbox" value="html" >html
+                <button onclick="checkBoxV()">전체 값 가져오기</button>
+            <script>
+
+                const checkBoxV = () =>{
+                            console.log("---");
+                        $('[type="checkbox"]').each( (i,v)=>{
+                            console.log(">>>>attr()");
+                            console.log($(v).attr("value"));
+                            
+                      
+                            //input태그의 value값은 attr 말고 val()함수를 이용할 수 있다.
+                            console.log(">>>>val()");
+                            console.log($(v).val());
+                        });
+
+
+                            console.log("---");
+                        $('input[type="checkbox"]').attr("value", (i,v)=>{
+                            console.log(v);
+                        });
+
+
+                            console.log("---");
+
+                      
+                        $('input[type="checkbox"]').each((i,v)=>{
+                            // checked속성은 prop() 함수를 이용해서 가져올 수 있다.
+                                    if($(v).prop("checked")){
+                                        console.log($(v).attr("value"));
+                                    }
+                        })
+
+                        // 선택자에 check를 가져오면 더 쉽게 할 수 있다.
+                            console.log("--- $('선택자'):check 이용 ---" );
+                            console.log($("input[type='checkbox']:checked"));
+                         
+                        $('input[type="checkbox]:checked').each( (i,v) => {
+                                    console.log("-- .value --"); 
+                                    console.log(v.value);
+                                    
+                                    console.log("-- .val --");
+                                    console.log($(v).val());
+                         })
+                }
+
+            </script>
+                <h2>css함수()</h2>
+                <pre>
+                    
+                    태그의 스타일을 추가, 변경, 확일할 떄 사용하는 함수
+                    
+                    1.css("css속성명") : css 속성 값 확인
+                    
+                    2.css("속성명", "속성값") : css속성 적용
+
+                    3.css({객체}) : 다수의 style 속성을 설정
+
+                    4.css( function(i,v){...}) : 로직에 의해서 css 속성을 적용
+
+                </pre>
+
+
+                <div id="containerCSS">
+                    <h3>test1</h3>
+                    <h3>test2</h3>
+                    <h3>test3</h3>
+                    <h3>test4</h3>
+                </div>
+                <button onclick="checkStyle()">css속성값 확인하기</button>
+                <button onclick="addStyle()">css속성 객체로 추가하기</button>
+                <button onclick="funcAddStyle()">css속성 함수로 추가하기</button>
+                
+            <script>
+                const checkStyle = () =>{
+                        // console.log($("div#containerCSS").children().css("fontSize"));
+
+                    $("div#containerCSS").children().each( (i,v)=>{
+                        console.log($(v).css("fontSize"));
+                    })
+                }
+
+                const addStyle = () =>{
+                    $("div#containerCSS").children().css({
+                        "fontSize":"32px",
+                        "text-decoration":"overline",
+                        "text-shadow":"3px 3px 5px gray"
+                     });
+
+                }
+                
+                const funcAddStyle = () =>{
+                    $("div#containerCSS").children().css("color", (i,v)=>{
+                        switch(i%4){
+                            case 0 : return "red"; 
+                            case 1 : return "orange";
+                            case 2 : return "green";
+                            case 3 : return "blue";
+                        }
+                    });
+                }
+
+
+            </script>
+
+
+        </body>
+    </html>

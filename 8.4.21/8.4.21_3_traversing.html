@@ -222,12 +222,12 @@
         </script>
                 <h3>자식 요소 탐색하기</h3>
                 <pre>
-                    1. children( 매개변수 ) : 모든 자식(손)을 리턴해주는 함수
+                    1. children() : 모든 자식(손)을 리턴해주는 함수
 
                     2. find( 매개변수 ) : 모든 후손 중에서 매개변수와 일치하는 태그
                 </pre>
                 
-                <table>
+                <table id="lsk1">
                     <tr>
                         <td>1</td>
                         <td>2</td>
@@ -253,9 +253,10 @@
             <script>
                 //tr 전체 찾기
                 $(function(){
-                            console.log($("table>tbody").children());
+                            console.log($("table#lsk1>tbody").children());
+                            
                             console.log("children.last.children");
-                            console.log($("table>tbody").children().last().children());
+                            console.log($("table#lsk1>tbody").children().last().children());
                             console.log("짝수 td");
                             console.log($("table>tbody").children().children().even());
                           
@@ -310,7 +311,7 @@
             <script>
                 $(function(){
                     //같은 레벨에 있는 모든 요소
-
+                        console.log("형제 요소 탐색");
                         $("div#container3>span:first").siblings().css("backgroundColor","tomato");
                             console.log($("div#container3>span:first").siblings());
                             console.log($("p").siblings());
@@ -338,10 +339,12 @@
 
                     //밑에 있는 태그 선택
                     //next()
+                            console.log("next");
+                            console.log($("div#container3>span:first").next());
                             console.log($("#container3>p:eq(1)").next());
                             console.log($("td").next());
                         $("td:first").next().css("backgroundColor","lime");
-
+                    //nextAll()
                             console.log($("#container3>p:last").nextAll());
                     //nextUntil()
                             console.log($("#container3>p:first").nextUntil("span:last"));

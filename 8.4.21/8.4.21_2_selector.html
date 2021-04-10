@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jQuery_selector</title>
-    <script src="/jquery-3.6.0.min"></script>
+    <script src="/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h2>선택자 활용하기</h2>
@@ -29,15 +29,28 @@
     <h4 class="tt">h3 2</h4>
 
     <script>
+        
+
+       let List = (a, b)=>{
+           _a=a;
+           _b=b;
+
+        
+       }
+       
+        console.log(list(a,b));
         //id가 container인 태그 불러오기
         console.log($("#container"));
+        console.log(document.getElementById("container"));
 
         //class를 이용한 선택자로 불러오기
         console.log($(".tt"));
-
+        console.log(document.getElementsByClassName("tt"));
+        
         //다중으로 element를 불러오기
         // ' , '로 구분해서 사용
-        console.log($("container, .tt"));
+        console.log($("#container, .tt"));
+
 
         
 
