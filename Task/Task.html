@@ -314,23 +314,23 @@
 
                     let writer = $('<div style="background-color: rgb(254, 195, 9); border: 1px black solid; height: 50px" id="common"><p style="margin: 0px 0px 0px 10px">검색할 작성자 아이디를 입력하세요</p><input type="text" name="title_input" id="title_input" style="margin: 0px 0px 0px 10px"> <button>검색</button></div>');;
 
-                    if( $("input#radioPro8_title").prop("checked") == true ){
-                      
-                        $("#common").remove();
-                        resultPro8.append(title);
-                        
+                            if( $("input#radioPro8_title").prop("checked") == true ){
+                            
+                                $("#common").remove();
+                                resultPro8.append(title);
+                                
 
 
-                    } else if( $("input#radioPro8_date").prop("checked")==true ){
-                      
-                        $("#common").remove();
-                        resultPro8.append(date);
+                            } else if( $("input#radioPro8_date").prop("checked")==true ){
+                            
+                                $("#common").remove();
+                                resultPro8.append(date);
 
-                    } else if( $("input#radioPro8_writer").prop("checked")==true ){
-                        
-                        $("#common").remove();
-                        resultPro8.append(writer);
-                    }
+                            } else if( $("input#radioPro8_writer").prop("checked")==true ){
+                                
+                                $("#common").remove();
+                                resultPro8.append(writer);
+                            }
                 }
             </script>
                 <br><br><hr>
@@ -564,35 +564,35 @@
                                 if(color.includes("All")){
                                     let childr = $(e).parent().parent().parent().nextUntil("#fin");
                                         childr.each( (i,v)=>{
-                                            console.log($(v).children().last());
+                                                    console.log($(v).children().last());
                                             let innerOne = $(v).children().last();
                                                     if(color.includes("red")){
-                                                        console.log("red");
-                                                        innerOne.css("backgroundColor","red");
+                                                                console.log("red");
+                                                            innerOne.css("backgroundColor","red");
 
                                                     } else if(color.includes("orange")){
-                                                        console.log("o");
-                                                        innerOne.css("backgroundColor","orange");
+                                                                console.log("o");
+                                                            innerOne.css("backgroundColor","orange");
 
                                                     } else  if(color.includes("yello")){
-                                                        console.log("y");
-                                                        innerOne.css("backgroundColor","yellow");
+                                                                console.log("y");
+                                                            innerOne.css("backgroundColor","yellow");
 
                                                     } else if(color.includes("green")){
-                                                        console.log("g");
-                                                        innerOne.css("backgroundColor","green");
+                                                                console.log("g");
+                                                            innerOne.css("backgroundColor","green");
 
                                                     } else  if(color.includes("blue")){
-                                                        console.log("b");
-                                                        innerOne.css("backgroundColor","blue");
+                                                                console.log("b");
+                                                            innerOne.css("backgroundColor","blue");
 
                                                     } else if(color.includes("navy")){
-                                                        console.log("n");
-                                                        innerOne.css("backgroundColor","navy");
+                                                                console.log("n");
+                                                            innerOne.css("backgroundColor","navy");
 
                                                     } else if(color.includes("purple")){
-                                                        console.log("p");
-                                                        innerOne.css("backgroundColor","purple");
+                                                                console.log("p");
+                                                            innerOne.css("backgroundColor","purple");
 
                                                     }
 
@@ -602,32 +602,32 @@
 
                                 } else{
                                     if(color.includes("red")){
-                                        console.log("red");
-                                        $(e).parent().parent().css("backgroundColor","red");
+                                                console.log("red");
+                                            $(e).parent().parent().css("backgroundColor","red");
 
                                     } else if(color.includes("orange")){
-                                        console.log("o");
-                                        $(e).parent().parent().css("backgroundColor","orange");
+                                                console.log("o");
+                                            $(e).parent().parent().css("backgroundColor","orange");
 
                                     } else  if(color.includes("yello")){
-                                        console.log("y");
-                                        $(e).parent().parent().css("backgroundColor","yellow");
+                                                console.log("y");
+                                            $(e).parent().parent().css("backgroundColor","yellow");
 
                                     } else if(color.includes("green")){
-                                        console.log("g");
-                                        $(e).parent().parent().css("backgroundColor","green");
+                                                console.log("g");
+                                            $(e).parent().parent().css("backgroundColor","green");
 
                                     } else  if(color.includes("blue")){
-                                        console.log("b");
-                                        $(e).parent().parent().css("backgroundColor","blue");
+                                                console.log("b");
+                                            $(e).parent().parent().css("backgroundColor","blue");
 
                                     } else if(color.includes("navy")){
-                                        console.log("n");
-                                        $(e).parent().parent().css("backgroundColor","navy");
+                                                console.log("n");
+                                            $(e).parent().parent().css("backgroundColor","navy");
 
                                     } else if(color.includes("purple")){
-                                        console.log("p");
-                                        $(e).parent().parent().css("backgroundColor","purple");
+                                                console.log("p");
+                                            $(e).parent().parent().css("backgroundColor","purple");
 
                                     }
                             
@@ -635,6 +635,233 @@
                     }
                 
             </script>
+                    <br><br><hr>
+                <fieldset>
+                    <legend>문제11</legend>
+
+                    <fieldset>
+                        <legend>문제11-1</legend>
+                        <input type="text" id="input11dot1">
+                        <button onclick="funcPro11dot1()">클릭</button>
+                    </fieldset>
+
+                <script>
+                    const funcPro11dot1 = () =>{
+                        let input11dot1 = $("input#input11dot1").val();
+
+                        alert(Number(10)+Number(input11dot1));
+                    }
+                </script>
+                    <br>
+                    <fieldset>
+                        <legend>문제11-2</legend>
+                        <input type="number" name="input11dot2" id="input11dot2">
+                        <button onclick="funcPro11dot2()">클릭</button>
+                        <div id="container11dot2">
+                            <p>1 2 4 7 11 16</p>
+                        </div>
+                    </fieldset>
+                <script>
+                    const funcPro11dot2 = () =>{
+                        let numbers = $("div#container11dot2>p").html();
+                        let input11dot2 = $("input#input11dot2").val();
+                        numbers = numbers.split(" ");
+                        console.log(numbers);
+                        let flg = true;
+                            for(let i =0; i<numbers.length; i++){
+                                if(numbers[i]==input11dot2){
+                                    alert(numbers[i]+"는 존재한다.");
+                                    flg=false;
+                                }
+                            }
+
+                            if(flg){
+                                alert('해당 값은 없다.');
+                            }
+
+                    }
+
+                </script>
+                    <br>
+                    <fieldset>
+                        <legend>문제11-3</legend>
+                        <input type="radio" name="site" id="naver" value="naver">naver
+                        <input type="radio" name="site" id="google" value="google">google
+                        <input type="radio" name="site" id="w3schools" value="w3schools">w3schools
+                    </fieldset>
+                <script>
+                    
+                        $("input[name=site]").click( (e)=>{
+                            location.href="http://www."+$(e.target).val()+".com";
+                        })
+                    
+                </script>
+                <br>
+                    <fieldset>
+                        <legend>문제11-4</legend>
+
+                        <input type="checkbox" name="pro" id="java">java
+                        <input type="checkbox" name="pro" id="database">database
+                        <input type="checkbox" name="pro" id="web">web
+                        <button onclick="func11dot4()">클릭</button>
+
+                    </fieldset>
+
+                <script>
+                    const func11dot4 = () =>{
+                        $("input#java").attr("checked", "checked");
+
+
+                    }
+                </script>
+                    <br>
+                    <fieldset>
+                        <legend>문제11-5</legend>
+                        랜덤: <input type="text" name="input11dot5" id="input11dot5"> 
+                        <button onclick="func11dot5()">클릭</button>
+                    </fieldset>
+
+                <script>
+                    const func11dot5 = () =>{
+                        $("input#input11dot5").val(Math.floor((Math.random()*45)+1));
+
+                         
+                    }
+                </script>
+                    <br>
+                    <fieldset>
+                        <legend>문제11-6</legend>
+                        <select name="select11dot6" id="select11dot6" onclick="func11dot6()">
+                            <option value="http://www.naver.com">naver</option>
+                            <option value="http://www.google.com">google</option>
+                            <option value="http://www.w3schools.com">w3schools</option>
+                        </select>
+                    </fieldset>
+                <script>
+                   const func11dot6 = () =>{
+                       console.log($("select#select11dot6").val());
+                       open($("select#select11dot6").val(), "_blank");
+                   }
+                </script>
+                    <fieldset>
+                        <legend>문제11-7</legend>
+                        숫자 : <p style="display: inline-block;" id="pPro11dot7">1,2,3,11,21,22,214,6</p>
+                        <button onclick="func11dot7()">클릭</button>
+                    </fieldset>
+                <script>
+                    const func11dot7=()=>{
+                        let arrPro11dot7 = $("p#pPro11dot7").html().split(",");
+                            arrPro11dot7.sort( (a,b)=>{
+
+                                return a-b;
+                            })
+                        let resultPro11dot7 = "";
+                                for(let i=0; i<arrPro11dot7.length; i++){
+                                    if(i==(arrPro11dot7.length-1)){
+                                        resultPro11dot7 += arrPro11dot7[i];
+                                    } else {
+                                        resultPro11dot7 += arrPro11dot7[i]+",";
+                                    }
+                                    
+                                }
+
+                                alert(resultPro11dot7);
+                                
+                            
+                                console.log(arrPro11dot7);
+
+                        
+                    }
+                    
+
+                </script>
+
+
+
+
+
+
+                    <br>
+                    <fieldset>
+                        <legend>문제11-8</legend>
+                        <input type="date" name="date11dot8" id="date11dot8"> <button onclick="func11dot8()">클릭</button>
+                    </fieldset>
+                <script>
+                    const func11dot8=()=>{
+                        let date = $("input#date11dot8").val();
+
+                        let arr = date.split("-");
+                        console.log(arr);
+                        let datetime = new Date(arr[0],Number(arr[1])-1,Number(arr[2])+3);
+                            console.log(datetime);
+                            console.log(datetime.getDay());
+
+                            switch(datetime.getDay()){
+                                case 0: 
+                                         alert("일요일");
+                                     break;
+                                case 1: 
+                                        alert("월요일");
+                                    break;
+                                case 2: 
+                                        alert("화요일");
+                                    break;
+                                case 3: 
+                                        alert("수요일");
+                                    break;
+                                case 4: 
+                                        alert("목요일");
+                                    break;
+                                case 5: 
+                                        alert("금요일");
+                                    break;
+                                case 6: 
+                                        alert("토요일");
+                                    break;
+                               
+
+                            }
+                    }
+                </script>
+                    <br>
+                    <fieldset>
+                        <legend>문제11-9</legend>
+                        <input type="number" name="num11dot9" id="num11dot9">
+                        <button onclick="func11dot9()">클릭</button>
+                    </fieldset>
+
+                <script>
+                    const func11dot9=()=>{
+                        let txt="";
+                        let numRef = $("input#num11dot9").val();
+                            for(let i=1; i<=9; i++){
+                                txt+= numRef+" x "+i+" = "+ Number(numRef)*Number(i)+"\n";
+                            }
+
+                            alert(txt);
+                        
+                    }
+                </script>
+                    <br>
+                    <fieldset>
+                        <legend>문제11-10</legend>
+                        <input type="text" name="inputPro11dot10" id="inputPro11dot10"> <span id="spanPro11dot10">님, 안녕하세요.</span>
+                        <button onclick="funcPro11dot10()">클릭</button>
+                    </fieldset>
+                <script>
+                    const funcPro11dot10= () =>{
+                        
+                        alert( $("input#inputPro11dot10").val()+$("span#spanPro11dot10").html());
+                    }
+                </script>
+
+
+                    
+
+                    
+
+
+                </fieldset>
 
 
 
