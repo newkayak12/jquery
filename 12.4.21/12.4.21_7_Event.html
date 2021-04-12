@@ -136,6 +136,9 @@
                         <option value="writer">writer</option>
                     </select>
                     <input type="text" name="keyword" id="keyword">
+                    <br>
+                    비밀번호 : <input type="password" name="password" id="password"><br>
+                    비밀번호 확인 : <input type="password" name="password" id="passwordCheck"> <span id="result"></span>
                 </form>
             <script>
                 $(function(){
@@ -147,9 +150,117 @@
                     $("#keyword").keyup(e=>{
                         console.log($(e.target).val());
                     });
+
+                    $("input#passwordCheck").keyup( e=>{
+                            if( ($("input#password").val() == $(e.target).val()) && ($(e.target).val() != "")){
+                                $("span#result").html("비밀번호가 일치합니다!").css({
+                                    backgroundColor:"darkgreen",
+                                    color:"white"
+                                })
+                            } else {
+                                $("span#result").html("비밀번호가 불일치합니다!").css({
+                                    backgroundColor:"red",
+                                    color:"white"
+                                })
+                            }
+                    })
                 });
                 
             </script>
+                <br><br><hr>
+                <h3>이벤트 삭제</h3>
+                <pre>
+                    off() : 연결된 이벤트를 삭제하는 것
+                </pre>
+                <button id="exec">실행</button>
+                <button id="rmvbtn">이벤트 삭제</button>
+                <p id="pTarget">이것이 타겟이다.</p>
+
+            <script>
+                $("#exec").click(e=>{
+                    let fSize = $("#pTarget").css("fontSize");
+                    console.log(fSize);
+                    $("#pTarget").css("fontSize",  (parseInt(fSize)+10)+"px"); 
+                              })
+
+                $("#rmvbtn").click(e=>{
+                    $("#exec").off("click");
+                    //이벤트 삭제
+                })
+            </script>
+            <br><br><hr>
+                <h2>bubbling</h2>
+                <pre>
+                    이벤트 처리할 때 동일 이벤트가 부모에 설정되어있으면 자식 태그를 클릭하더라도 부모까지 이벤트를 발생시키는 효과
+                    
+                    child의 영역은 child의 영역이면서 parent의 영역이니까 이벤트가 중첩 실행된다.
+                </pre>
+                <div id="parent">
+                    <div id="child">
+                        <span>안녕</span>
+                    </div>
+                </div>
+
+            <style>
+                #parent{
+                    border: 1px solid blue;
+                    background-color: darkgreen;
+                }
+                #child{
+                    border: 1px solid red;
+                    background-color: orange;
+                    margin: 30px;
+                }
+                #child>span {
+                    border: 1px solid green;
+                    background-color: skyblue;
+                    margin: 30px;
+                }
+            </style>
+            <script>
+                $("#parent").click( (e)=>{
+                    alert('parent');
+                })
+                $("#child").click ( (e)=>{
+                    alert('child');
+                })
+                $("#child>span").click( (e)=>{
+                    alert('span');
+                    //이벤트 실행 전염을 막기 위해서 stopPropagation(번식이라는 뜻)()
+                    e.stopPropagation();
+                })
+
+                //c
+            </script> 
+            <br><br><hr>
+                <h2>hover</h2>
+                <pre>
+                    hover == mouseenter + mouseleave
+                    hover(이벤트 핸들러, 이벤트 핸들러)
+                </pre>
+                <p id="hoverTest">글자?</p>
+
+            <script>
+                $("p#hoverTest").hover( (e)=>{
+                    $(e.target).html("커졌다").css("fontSize","40px");
+
+                },(e)=>{
+                    $(e.target).html("작아졌다").css("fontSize","16px");
+
+                })
+            </script>
+            <style>
+                #hoverTest{
+                    height: 200px;
+                    width: 200px;
+                    background-color: orange;
+                    color: blue;
+                    text-align: center;
+                    vertical-align: middle;
+                    display: table-cell;
+                }
+            </style>
+
 
             
         </body>
