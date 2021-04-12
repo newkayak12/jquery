@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Event</title>
+            <script src="../jquery-3.6.0.min.js"></script>
+        </head>
+        <body>
+                <h2>Event Object info</h2>
+                <pre>
+                    이벤트 객체는 이벤트가 발생했을 때 관련 정보를 갖고 있는 객체
+                    이벤트 핸들러(함수)에 매게변수로 자동으로 넣어준다.
+                    인라인으로 연결한 이벤트 핸들러는 직접 넣어줘야함
+
+                    예를 들어서  &lt;button onclick = "eventTest( event )"&gt; inline형식 &lt;/button &gt;
+                    이러면 const eventTest = (e)=>{ ... }와 같이 event 변수를 대입해야 이벤트의 정보를 열람할 수 있다. 
+
+                    그러나  &lt;button id = 'btn'&gt;  inline형식 &lt;/button &gt;
+                    이러면 $("#btn").on("click", (e)=> { ... }) on함수를 이용해서 처리한다고 하면 버튼에 event를 넣지 않아도 알아서 이벤트 정보를 볼 수 있다.
+                    또한 $("#btn").click((e)=>{ ... }) 라고 해도 굳이 필요가 없다.
+
+                </pre>
+                <button onclick="eventTest('event')">inline</button>
+                <button id="btn">event1</button>
+                <button id="btn2">event2</button>
+            <script>
+                const eventTest = (e) =>{
+                    console.log(e);
+                }
+
+                $("#btn").on("click", (e)=>{
+                    console.log(e);
+                });
+
+                $("#btn2").click((e)=>{
+                    console.log(e);
+                })
+            </script>
+                <br><br><hr>
+
+            
+            
+                <h3>이벤트 jquery방식으로 연결하기</h3>
+                <pre>
+                    1.on() 함수 이용 : 상세 설정을 할 경우 사용
+                    2.간단한 함수 이용 : 간단한 기본적인 처리를 할 경우
+                </pre>
+
+                <br><br><hr>
+
+                <h4>on함수를 이용한 이벤트 처리</h4>
+
+                <div id="onTest">On() 함수</div>
+                <div id="manyEvent">다양한 이벤트 연결</div>
+            <script>
+                $("#onTest").on("click", (e)=>{
+                    console.log(e);
+                    $(e.target).css({
+                        "backgroundColor":"lime",
+                        "color":"white"
+                    });
+
+                })
+
+// on() 함수 매개변수에 객체를 넣어서 여러 이벤트를 연결할 수 있다. 
+// {"이벤트 속성": 핸들러, "이벤트 속성:핸들러"}
+                $("#manyEvent").on(
+                    {"click":(e)=>{
+                        $(e.target).css({
+                            "fontSize":"30px"
+                        })
+                       
+                    },
+                    "mouseenter":(e)=>{
+                        $(e.target).html("마우스가 들어왔다.")
+
+                    },
+                    "dblclick":(e)=>{
+                        $(e.target).css({
+                            "backgroundColor" : "tomato"
+                        })
+                    }
+
+                    });
+            </script>
+
+                <br><br><hr>
+                <div id="needData">
+                    <img src="../9.4.21/jqueryImgTest.jpg" alt="" width="200" height="200" class="test">
+                    <img src="../9.4.21/jqueryImgTest.jpg" alt="" width="200" height="200" class="test">
+                    <img src="../9.4.21/jqueryImgTest.jpg" alt="" width="200" height="200" class="test">
+                    <img src="../9.4.21/jqueryImgTest.jpg" alt="" width="200" height="200" class="test">
+                    <img src="../9.4.21/jqueryImgTest.jpg" alt="" width="200" height="200" class="test">
+                </div>
+            <script>
+                $(".test").each((i,v)=>{
+                    $(v).on("click",{name : i}, (e)=>{
+                        console.log(e.data,e.data["name"]);
+                    })
+                })
+
+            </script>
+                <br><br><hr>
+                <h3>이벤트 한 번만 실행하기</h3>
+                <pre>
+                    one() : 이벤트를 한 번만 실행하는 함수
+                </pre>
+                <h4 id="oneTest">한 번만 클릭할 수 있음</h4>
+            <script>
+                $("#oneTest").one("click", (e)=>{
+                    alert("클릭했니?");
+                })
+            </script>
+                <br><br><hr>
+                <h3>간단한 이벤트 처리</h3>
+                <pre>
+                     이벤트 연결을 위한 지정 함수를 만들었음
+                     함수에 이벤트 핸들러만 인자로 넘기면 이벤트가 연결됨
+                     * jQuery 방식으로 element를 불러와야만 함
+                </pre>                
+                <h4> 윈도우 크기 변경시 이벤트를 설정한다.</h4>
+            <script>
+                $(function(){
+                    $(window).resize( e=>{
+                        console.log(window.innerWidth, window.innerHeight);
+                    })
+                })
+            </script>
+                <h3>keyup(), change()</h3>
+                <form action="">
+                    <select name="" id="title">
+                        <option value="title">title</option>
+                        <option value="content">content</option>
+                        <option value="writer">writer</option>
+                    </select>
+                    <input type="text" name="keyword" id="keyword">
+                </form>
+            <script>
+                $(function(){
+                    $("#title").change( e=>{
+                        console.log($(e.target).val());
+                        $(e.target).next().focus();
+                    })
+                    
+                    $("#keyword").keyup(e=>{
+                        console.log($(e.target).val());
+                    });
+                });
+                
+            </script>
+
+            
+        </body>
+</html>
