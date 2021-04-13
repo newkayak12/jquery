@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>this</title>
+            <script src="../jquery-3.6.0.min.js"></script>
+        </head>
+
+        <body>
+                    <h1>this</h1>
+                    <pre>
+                        이벤트 핸들러 함수로 화살표 함수를 지정했을 때 this는 window객체이고,
+                        이벤트 핸들러 함수로 익명 함수를 지정했을 때는 this는 이벤트가 발생한 객체가 된다.
+                        
+                            *익명함수로 실행해서 this로 처리할 것인지?
+                            *=>로 매개변수 e를 받아서 e.target으로 처리할 것인지...?
+
+                            /// 내가 보기에 'this'가 바인딩 되는 걸 따로 공부하는게 나을것 같은데
+                    </pre>
+
+                    
+                    <img src="../9.4.21/jqueryImgTest.jpg" alt="" id="fadeImg" width="200" height="200">
+            <script>
+                    
+                                     
+    
+                    $("#fadeImg").hover(/*  (e)=>{
+                        console.log(this); */
+                                        function(e){
+
+                        $(e.target).fadeTo(1000,1);
+                    }, (e)=>{
+                        $(e.target).fadeTo(1000,0.3);
+                    })
+    
+            </script>
+
+            <!-- 바인드 -->
+
+                    <h3>전역함수 선언</h3>
+                    <script>
+                        const testThis = ()=>{
+                            console.log(this);
+                        }
+                        testThis();  //window
+
+                        const annoThis = function(){
+                            console.log(this);
+                        }
+                        annoThis(); //window
+
+                        //익명함수로 선언한 함수는  this를 바인딩 해줄 수 있다.
+                        //바인딩은 : call() apply() bind함수로 이용할 수 있다.
+                        annoThis.call({name:"유병승"});
+
+
+                        //여튼 this값을 이용할 때는 주의해야한다....라는게 그냥 요약이다.
+                    </script>
+            
+        </body>
+    </html>

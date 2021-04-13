@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>AffterEffect</title>
+            
+            <script src="../jquery-3.6.0.min.js"></script>
+        
+        </head>
+
+        <body>
+
+            <!-- 
+                animate()
+                시간/ 속성/ callback 함수
+
+                show()/hide()/toggle() : 선택된 요소를 보이고 숨기는 (display none)
+                slideDown()/Up()/Toggle() : 부드럽게 움직이는 
+                fadeIn()/Out()/To()/Toggle()
+             -->
+                <h1>animate</h1>
+                <pre>
+                    함수를 이용해서 간단하게 애니메이션 효과를 적용하는 것
+
+                </pre>
+
+
+                <div id="target"></div>
+            <style>
+                #target{
+                    width: 100px;
+                    height: 100px;
+                    background-color: chartreuse;
+                    position: absolute;
+                    top: 80px;
+                }   
+            </style>
+
+            <script>
+                $("div#target").click( (e)=>{
+                    $(e.target).animate({left:"200px",
+                                       height:"200px",
+                                       width:"200px",
+                                       /* opacity:"0.2" */},
+                                      
+                                       ()=>{
+                                        $(e.target).animate({left:"5px",
+                                       height:"100px",
+                                       width:"100px"},
+                                       "5s");
+                                       });
+                });
+
+            </script>
+                    <br><br><hr>
+                    <h1>show/hide</h1>
+                    <pre>
+                        특정 태그를 보이게/안보이게 하는 함수
+                        display none/ block
+                    </pre>
+                    <button id="showTest">show</button>
+                    <button id="hideTest">hide</button>
+                    <button id="toggleTest">toggle</button><br>
+                    <img src="../9.4.21/jqueryImgTest.jpg" alt="" width="200" height="200" id="imgShowHide">
+                   
+            <script>
+                $("#showTest").click( e=>{
+                    $("#imgShowHide").show(1000);
+                })
+
+                $("#hideTest").click( e=>{
+                    $("#imgShowHide").hide(1000);
+                })
+
+                $("#toggleTest").click( e=>{
+                    $("#imgShowHide").toggle(1000);
+                })
+            </script>
+                    <br><br><hr>
+                    <h1>Slide</h1>
+                    <pre>
+                    미끄러지는 효과
+                    </pre>
+
+                    <button id="slideUpT">slideUP</button>
+                    <button id="slideDownT">slideDown</button>
+                    <button id="slideToggleT">slideToggle</button>
+
+                    <div class="a"></div>
+            <style>
+                .a{
+                    width: 100px;
+                    height: 100px;
+                    border: 1px black solid;
+                    background-color: darkgreen;
+                }
+            </style>
+
+            <script>
+                $("#slideUpT").click(e=>{
+                    $(".a").slideUp(500);
+                });
+
+                $("#slideDownT").click(e=>{
+                    $(".a").slideDown(500);
+                });
+
+                $("#slideToggleT").on("click",e=>{
+                    $(".a").slideToggle(500);
+                });
+
+            </script>
+            <br><br><hr><h3>예시</h3>
+                    <div id="ex">
+                            <div>첫 번째 메뉴</div>
+                            <p class="contents">내용1</p>
+                            <div>두 번째 메뉴</div>
+                            <p class="contents">내용2</p>
+                            <div>세 번째 메뉴</div>
+                            <p class="contents">내용3</p>
+                            <div>네 번째 메뉴</div>
+                            <p class="contents">내용4</p>
+                            <div>다섯 번째 메뉴</div>
+                        <p class="contents">내용5</p>
+                    </div>
+            <style>
+               #ex div{
+                    background-color: darkgreen;
+                    color: white;
+                    font-size: 32px;
+                    width: 250px;
+                    height: fit-content;
+                    border-radius: 10px;
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+                #ex p{
+                    text-align: center;
+                    border: 1px black solid;
+                    width: 250px;
+                    margin-top: 5px;
+                    display: none;
+                    
+                }
+            </style>
+
+            <script>
+          
+                
+
+                // $("#ex div").click( e=>{
+                //     $("p").slideUp();
+                //     $(e.target).next().slideToggle();
+                // })
+
+                $($(".contents").prev()).click( e=>{
+                    
+                    $(e.target).parent().children("p").slideUp();
+                    $(e.target).next().slideToggle();
+                })
+
+
+            </script>
+                <br><br><hr>
+                <h2>fade</h2>
+                <pre>
+                    태그를 fadein/fadeout을 주는 애니메이션
+                    사라지게 하는 것 out
+                    나타나게 하는 것 in
+                    특정 지점까지 희미하게 하는 것 to
+                    왔다 갔다 toggle
+                </pre>
+                <button id="fadeInTest">fadeIn</button>
+                <button id="fadeOutTest">fadeOut</button>
+                <button id="fadeToTest">fadeTo_는 이미지에 호버임</button>
+                <button id="fadeToggleTest">fadeToggle</button>
+                <br>
+
+
+                <img src="../9.4.21/jqueryImgTest.jpg" alt="" id="fadeImg" width="200" height="200">
+        <script>
+
+                $("#fadeInTest").on("click", (e)=>{
+                    $("#fadeImg").fadeIn(1000);
+                })
+
+                
+                $("#fadeOutTest").on("click", (e)=>{
+                    $("#fadeImg").fadeOut(1000);
+                })
+
+
+                $("#fadeToggleTest").on("click", (e)=>{
+                    $("#fadeImg").fadeToggle(1000);
+                })
+                
+
+                $("#fadeImg").hover( (e)=>{
+                    $(e.target).fadeTo(1000,1);
+                }, (e)=>{
+                    $(e.target).fadeTo(1000,0.3);
+                })
+
+        </script>
+        </body>
+    </html>
